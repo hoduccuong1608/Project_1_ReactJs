@@ -1,5 +1,11 @@
-function Home() {
-    return <h2>Home page</h2>;
+import style from './menu.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
+function Menu() {
+    return (
+        
+    );
 }
 
-export default Home;
+export default Menu;
