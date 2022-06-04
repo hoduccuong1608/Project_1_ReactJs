@@ -1,0 +1,68 @@
+.container {
+    background-color: rgb(218, 224, 208);
+    width: 800px;
+    padding-top: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+.content .top-content {
+    position: fixed;
+}
+.top-content .name-content {
+    margin: 30px 0 10px;
+}
+.top-content .request {
+    font-style: italic;
+}
+.liner {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 15px 0 30px;
+    width: 100%;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.title-input {
+    position: relative;
+    display: block;
+    text-align: right;
+    float: left;
+    margin-top: 10px;
+    width: 33.33333333%;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.form-control {
+    display: block;
+    padding: 4px 10px;
+    line-height: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgb(0, 0, 0, 8%);
+    min-width: 370px;
+}
+::placeholder {
+    float: right;
+    color: rgba(0, 0, 0, 0.4);
+    margin-top: 5px;
+}
+
+.btn-send {
+    position: relative;
+    text-align: center;
+    line-height: 46px;
+    min-width: 80px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #21409a;
+    border: 1px solid #21409a;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 30px;
+}

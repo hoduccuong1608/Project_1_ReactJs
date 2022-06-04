@@ -1,0 +1,26 @@
+.wrapper {
+    position: fixed;
+    max-height: 86px;
+    background-color: rgb(255, 255, 255);
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.header {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: solid #4960a7;
+}
+
+.logo {
+    width: var(--width-header);
+    height: auto;
+}
+.namebank {
+    font-size: 2rem;
+    font-size: 2.5vw;
+    color: #21409a;
+    line-height: var(--width-header);
+}
