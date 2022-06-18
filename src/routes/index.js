@@ -1,13 +1,11 @@
-import Menu from '@/pages/Menu';
-import FormInput from '@/pages/FormInput';
+import Home from '@/pages/Home';
+import Form from '@/pages/Form';
 import Login from '@/pages/Login';
 
 const publicRoutes = [
-    { path: '/', compoment: Menu },
-    { path: '/form', compoment: FormInput },
+    { path: '/', compoment: Home },
+    { path: '/form', compoment: Form },
     { path: '/login', compoment: Login },
 ];
-
-// const privateRoutes = [{ path: '/login', compoment: Login }];
-
+// export const praviteRoutes = [{ path: '/', compoment: Home }];
 export { publicRoutes };

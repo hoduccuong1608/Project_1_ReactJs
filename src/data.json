@@ -1,0 +1,73 @@
+{
+    "users": [
+        {
+            "full_name": "Trần Văn A",
+            "accout_number": "333333333",
+            "id_number": "3333333332222",
+            "id_date": "2022-05-26",
+            "phone_number": "3333333332222",
+            "value": "33333333322222",
+            "id": 2
+        },
+        {
+            "full_name": "Trần Văn B",
+            "accout_number": "222222222",
+            "id_number": "2222222222222",
+            "id_date": "2022-05-26",
+            "phone_number": "2222222222222",
+            "value": "22222222222222",
+            "id": 2
+        },
+        {
+            "full_name": "Trần Văn C",
+            "accout_number": "33333333333",
+            "id_number": "333333333333",
+            "id_date": "2022-05-26",
+            "phone_number": "333333333333",
+            "value": "333333333333",
+            "id": 3
+        },
+        {
+            "full_name": "Trần Văn D",
+            "accout_number": "4444444444",
+            "id_number": "444444444444",
+            "id_date": "2022-05-27",
+            "phone_number": "444444444444",
+            "value": "444444444444",
+            "id": 4
+        },
+        {
+            "full_name": "777777",
+            "accout_number": "66666666666666",
+            "id_number": "5555555",
+            "id_date": "2022-05-19",
+            "phone_number": "555555",
+            "value": "55555555",
+            "id": 5
+        }
+    ],
+
+    "staffs": [
+        {
+            "full_name": "Nguyễn Thị A",
+            "user_name": "nguyenthia",
+            "pass_word": "1",
+            "id": 1,
+            "position": "Nhân viên"
+        },
+        {
+            "id": 2,
+            "full_name": "Nguyễn Thị B",
+            "user_name": "nguyenthib",
+            "pass_word": "2",
+            "position": "Nhân viên"
+        },
+        {
+            "id": 3,
+            "full_name": "Nguyễn Thị C",
+            "user_name": "nguyenthic",
+            "pass_word": "3",
+            "position": "Nhân viên"
+        }
+    ]
+}

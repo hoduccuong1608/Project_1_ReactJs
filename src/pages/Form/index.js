@@ -1,9 +1,9 @@
-import style from './FormInput.module.scss';
+import style from './Form.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-function FormInput() {
+function Form() {
     return (
         <div className={cx('container')}>
             <div className={cx('top-content')}>
@@ -68,4 +68,4 @@ function FormInput() {
     );
 }
 
-export default FormInput;
+export default Form;
