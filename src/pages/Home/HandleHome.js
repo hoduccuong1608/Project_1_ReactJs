@@ -31,8 +31,8 @@ const BoxNumber = ({ obj }) => {
         obj.setIsAccept(false);
     };
 
-    console.log('index', obj.index);
-    console.log('accept', obj.isAccept);
+    // console.log('index', obj.index);
+    // console.log('accept', obj.isAccept);
     return (
         <div>
             <div className={cx('menu')}>
@@ -66,8 +66,8 @@ const BoxUser = ({ obj }) => {
             obj.setIsAccept(false);
         });
     };
-    console.log('index', obj.index);
-    console.log('accept', obj.isAccept);
+    // console.log('index', obj.index);
+    // console.log('accept', obj.isAccept);
     return (
         <div className={cx('main-content')}>
             <h2 className={cx('title-menu')}>Thông tin khách hàng</h2>
@@ -85,7 +85,7 @@ const BoxUser = ({ obj }) => {
 
                     <div>Số điện thoại: {obj.users[obj.index].phone_number}</div>
 
-                    <div>Số tiền: {obj.users[obj.index].value}</div>
+                    <div>Số tiền: {obj.users[obj.index].money}</div>
                 </div>
             </div>
 

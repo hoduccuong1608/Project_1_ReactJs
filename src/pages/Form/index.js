@@ -1,9 +1,32 @@
 import style from './Form.module.scss';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 
 const cx = classNames.bind(style);
 
 function Form() {
+
+    const [accoutnumber , setAccoutNumber] = useState();
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        const OPTIONS = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            Credentials: 'omit',
+            body: JSON.stringify({
+                accoutnumber: accoutnumber
+            })
+    };
+
+    try {
+        const response = await fetch('http://localhost:5000/api/customer', OPTIONS);
+        const data = await response.json();
+        console.log(data.id);
+    } catch(err) {
+        console.log(err);
+        alert('Số tài khoản không đúng, vui lòng nhập lại');
+      }
+}
     return (
         <div className={cx('container')}>
             <div className={cx('top-content')}>
@@ -16,7 +39,7 @@ function Form() {
                     <div className={cx('form-group')}>
                         <label className={cx('title-input')}>Số tài khoản</label>
                         <div className={cx('box-input')}>
-                            <input type="text" className={cx('form-control')} id="accout_number" name="accout_number" />
+                            <input type="text" className={cx('form-control')} id="accout_number" name="accout_number" onChange={e => setAccoutNumber(e.target.value)} />
                         </div>
                     </div>
 
@@ -57,7 +80,7 @@ function Form() {
 
                     <div className={cx('form-group')}>
                         <div className={cx('box-input')}>
-                            <button type="button" className={cx('btn-send')}>
+                            <button onClick={handleSubmit} type="button" className={cx('btn-send')}>
                                 Gửi
                             </button>
                         </div>
