@@ -9,26 +9,53 @@ export const HandleHome = () => {
 
     const data = useContext(DataContext);
     const users = data.users;
-
+    const setIsLoaded = data.setIsLoaded;
+    const id_staff = sessionStorage.getItem('accessToken');
+    const customers = data.customers;
     const [index, setIndex] = useState(i.current);
 
     const [isAccept, setIsAccept] = useState(false);
 
     if (!isAccept) {
-        return <BoxNumber obj={{ index, setIndex, isAccept, setIsAccept, users }} />;
+        return <BoxNumber obj={{ index, setIndex, isAccept, setIsAccept, users, customers, id_staff, setIsLoaded}} />;
     } else if (isAccept) {
-        return <BoxUser obj={{ index, setIndex, isAccept, setIsAccept, users }} />;
+        return <BoxUser obj={{ index, setIndex, isAccept, setIsAccept, users, customers, id_staff, setIsLoaded}} />;
     }
 };
 
 const BoxNumber = ({ obj }) => {
     const handleAccept = () => {
         obj.setIsAccept(true);
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            Credentials: 'omit',
+            body: JSON.stringify({
+                status: 1,
+                id: obj.customers[obj.index].id,
+                id_staff: obj.id_staff
+            })
+    };
+        fetch('http://localhost:5000/api/insert' , options)
+        .then(obj.setIsLoaded(false));
     };
 
     const handleNext = () => {
         obj.setIndex(obj.index + 1);
         obj.setIsAccept(false);
+
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            Credentials: 'omit',
+            body: JSON.stringify({
+                status: 2,
+                id: obj.customers[obj.index].id,
+                id_staff: obj.id_staff
+            })
+    };
+        fetch('http://localhost:5000/api/insert' , options)
+        .then(obj.setIsLoaded(false));
     };
 
     // console.log('index', obj.index);
@@ -37,7 +64,7 @@ const BoxNumber = ({ obj }) => {
         <div>
             <div className={cx('menu')}>
                 <ul className={cx('box-number')}>
-                    <li className={cx('number-screen')}>{obj.users[obj.index].id}</li>
+                    <li className={cx('number-screen')}>{obj.customers[0].id}</li>
                     <li>Số tiếp theo</li>
                 </ul>
             </div>
@@ -59,12 +86,12 @@ const BoxNumber = ({ obj }) => {
 
 const BoxUser = ({ obj }) => {
     const handleDone = () => {
-        var promise = new Promise((resolve, reject) => {
-            resolve();
-        }).then(() => {
+        // var promise = new Promise((resolve, reject) => {
+        //     resolve();
+        // }).then(() => {
             obj.setIndex(obj.index + 1);
             obj.setIsAccept(false);
-        });
+        // })
     };
     // console.log('index', obj.index);
     // console.log('accept', obj.isAccept);

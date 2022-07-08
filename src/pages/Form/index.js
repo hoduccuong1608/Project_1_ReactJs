@@ -2,11 +2,13 @@ import style from './Form.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 
+
 const cx = classNames.bind(style);
 
 function Form() {
 
     const [accoutnumber , setAccoutNumber] = useState();
+    const [id, setId] = useState();
     const handleSubmit = async(e) => {
         e.preventDefault();
         const OPTIONS = {
@@ -19,9 +21,11 @@ function Form() {
     };
 
     try {
-        const response = await fetch('http://localhost:5000/api/customer', OPTIONS);
+        const response = await fetch('http://localhost:5000/api/insert' , OPTIONS);
         const data = await response.json();
-        console.log(data.id);
+        setId(data[0].id);
+        console.log(data[0].id);
+    
     } catch(err) {
         console.log(err);
         alert('Số tài khoản không đúng, vui lòng nhập lại');
@@ -87,8 +91,20 @@ function Form() {
                     </div>
                 </form>
             </div>
+            {id && <ResponseID id={id}/>}
         </div>
     );
 }
 
+
+function ResponseID ({id}) {
+    return (
+        <div className={cx('response')}>
+            <div className={cx('tiltle_response')}>Số của quý khách là</div>
+            <div className={cx('id_response')}>{id}</div>
+        </div>
+    )
+}
 export default Form;
+
+

@@ -4,6 +4,7 @@ import { useState, useEffect, createContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import usersApi from '@/Api/usersAPi';
 import staffsApi from '@/Api/staffsApi';
+import customersApi from '@/Api/customers';
 import { HandleHome } from './HandleHome';
 const cx = classNames.bind(style);
 export const DataContext = createContext();
@@ -14,6 +15,7 @@ function Home() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [staffs, setStaffs] = useState();
     const [users, setUsers] = useState();
+    const [customers, setCustomers] = useState();
     const id_staff = sessionStorage.getItem('accessToken');
 
     useEffect(() => {
@@ -30,7 +32,7 @@ function Home() {
             }
         };
         fetchUsersList();
-    }, []);
+    }, [isLoaded]);
 
     useEffect(() => {
         const fetchStaffsList = async () => {
@@ -45,8 +47,23 @@ function Home() {
             }
         };
         fetchStaffsList();
-    }, []);
+    }, [isLoaded]);
 
+
+    useEffect(() => {
+        const fetchCustomersList = async () => {
+            try {
+                const response = await customersApi.getAll();
+                setCustomers(response.data);
+                console.log('customers', response);
+            } catch (error) {
+                console.log('failed', error);
+                setIsLoaded(true);
+                setError(error);
+            }
+        };
+        fetchCustomersList();
+    }, [isLoaded]);
     // Logout
     const logout = () => {
         sessionStorage.removeItem('accessToken');
@@ -59,9 +76,9 @@ function Home() {
         console.log('failse');
     } else if (!isLoaded) {
         console.log('loading...');
-    } else if (staffs && users)
+    } else if (staffs && users && customers)
         return (
-            <DataContext.Provider value={{ staffs, users }}>
+            <DataContext.Provider value={{ staffs, users, customers, setIsLoaded }}>
                 <div className={cx('container')}>
                     <ul className={cx('header')}>
                         <li>
@@ -74,7 +91,7 @@ function Home() {
                             <h3 className={cx('position-staff')}>Chức vụ: {staffs[id_staff-1].position}</h3>
                         </li>
                         <li>
-                            <h3>Số người còn lại: {users.length}</h3>
+                            <h3>Số người còn lại: {customers.length}</h3>
                         </li>
                         <li>
                             <button className={cx('btn-logout')} onClick={logout}>
