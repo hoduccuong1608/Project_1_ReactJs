@@ -2,37 +2,40 @@ import style from './Home.module.scss';
 import classNames from 'classnames/bind';
 import { useState, useEffect, createContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import usersApi from '@/Api/usersAPi';
+// import usersApi from '@/Api/usersAPi';
 import staffsApi from '@/Api/staffsApi';
 import customersApi from '@/Api/customers';
 import { HandleHome } from './HandleHome';
+
 const cx = classNames.bind(style);
 export const DataContext = createContext();
 function Home() {
-    // const i = 0;
+
     const navigate = useNavigate();
     const [error, setError] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
     const [staffs, setStaffs] = useState();
-    const [users, setUsers] = useState();
     const [customers, setCustomers] = useState();
+    const [newCustomer, setNewCustomer] = useState();
+    const [isStart, setIsStart] = useState(true);
     const id_staff = sessionStorage.getItem('accessToken');
-
-    useEffect(() => {
-        const fetchUsersList = async () => {
-            try {
-                const response = await usersApi.getAll();
-                setUsers(response.data);
-                setIsLoaded(true);
-                console.log('users', response);
-            } catch (error) {
-                console.log('failed', error);
-                setIsLoaded(true);
-                setError(error);
-            }
-        };
-        fetchUsersList();
-    }, [isLoaded]);
+    // const [users, setUsers] = useState();
+    
+    // useEffect(() => {
+    //     const fetchUsersList = async () => {
+    //         try {
+    //             const response = await usersApi.getAll();
+    //             setUsers(response.data);
+    //             setIsLoaded(true);
+    //             console.log('users', response);
+    //         } catch (error) {
+    //             console.log('failed', error);
+    //             setIsLoaded(true);
+    //             setError(error);
+    //         }
+    //     };
+    //     fetchUsersList();
+    // }, [isLoaded]);
 
     useEffect(() => {
         const fetchStaffsList = async () => {
@@ -42,12 +45,12 @@ function Home() {
                 console.log('staffs', response);
             } catch (error) {
                 console.log('failed', error);
-                setIsLoaded(true);
+                // setIsLoaded(true);
                 setError(error);
             }
         };
         fetchStaffsList();
-    }, [isLoaded]);
+    }, []);
 
 
     useEffect(() => {
@@ -56,14 +59,58 @@ function Home() {
                 const response = await customersApi.getAll();
                 setCustomers(response.data);
                 console.log('customers', response);
+                setIsLoaded(true);
             } catch (error) {
                 console.log('failed', error);
-                setIsLoaded(true);
                 setError(error);
             }
         };
         fetchCustomersList();
     }, [isLoaded]);
+
+    useEffect( () => {
+        setIsLoaded(true);
+        const fetchnewCus = async () => {
+            // try {
+                const response =await fetch(`http://localhost:5001/api/customers/${id_staff}`)
+                const data = await response.json();
+                setNewCustomer(data);
+                console.log('newCustomers', newCustomer);
+            // }
+            // catch (err) {
+            //     console.log('failed', err);
+            //     setError(err);
+            // }
+      
+        }
+        fetchnewCus();
+    }, [isLoaded]);
+
+    function SetIsStart({setIsLoaded}) {
+
+        const handleStart = async() => {
+            setIsStart(false);
+            setIsLoaded(true); 
+            console.log('newCustomers', newCustomer);
+            const option2 = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                Credentials: 'omit',
+                body: JSON.stringify({
+                    status: 3,
+                    next: 0,
+                    id: customers[0].id,
+                    id_staff: id_staff
+                })
+        };
+        await fetch('http://localhost:5001/api/customers/update' , option2)
+   
+                   
+        }
+
+        return (<div className={cx('btn-start')} onClick={handleStart} >Bắt đầu</div>)
+    } 
+
     // Logout
     const logout = () => {
         sessionStorage.removeItem('accessToken');
@@ -74,11 +121,13 @@ function Home() {
         return <Navigate to="/login" />;
     } else if (error) {
         console.log('failse');
-    } else if (!isLoaded) {
-        console.log('loading...');
-    } else if (staffs && users && customers)
+    }
+    // else if (!isLoaded) {
+    //         console.log('loading...')
+    // }
+     else if (staffs  && customers)
         return (
-            <DataContext.Provider value={{ staffs, users, customers, setIsLoaded }}>
+            <DataContext.Provider value={{ newCustomer,isLoaded, setIsLoaded, setNewCustomer}}>
                 <div className={cx('container')}>
                     <ul className={cx('header')}>
                         <li>
@@ -99,9 +148,11 @@ function Home() {
                             </button>
                         </li>
                     </ul>
+
+                
                 </div>
 
-                <HandleHome />
+                { isStart ? <SetIsStart setIsLoaded= {setIsLoaded}/> : <HandleHome />}
             </DataContext.Provider>
         );
 }

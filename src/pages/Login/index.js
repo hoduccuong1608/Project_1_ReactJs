@@ -34,7 +34,7 @@ export default function Login() {
             // redirect: 'follow',
         };
         try {
-            const response = await fetch('http://localhost:5000/api/login', requestOptions)
+            const response = await fetch('http://localhost:5001/api/login', requestOptions)
             const data = await response.json();
             console.log(data.response[0].id_staff);
             sessionStorage.setItem('accessToken', data.response[0].id_staff);

@@ -3,12 +3,15 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 export default function Screen() {
+
+
     return (
         <div>
             <div className={cx('box-screen')}>
-                <div>So tiep theo</div>
-                <div>Quay so</div>
+                <div className={cx('next')}>Số tiếp theo: </div>
+                <div className={cx('next')}>Quầy số: </div>
             </div>
         </div>
     );
+    
 }

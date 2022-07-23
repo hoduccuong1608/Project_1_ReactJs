@@ -3,4 +3,13 @@
     width: 600px;
     height: 300px;
     background-color: rgb(218, 224, 208);
+    text-align: center;
+    // align-items: center;
+}
+.next {
+    position: relative;
+	left: 50%;
+    top: 50%;
+	transform: translate(-50%, -75%);
+    font-size: 2.5rem;
 }

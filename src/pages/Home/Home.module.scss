@@ -99,7 +99,7 @@
 
 .btn-done {
     margin-bottom: 20px;
-    width: 80px;
+    width: 120px;
     height: 50px;
     font-size: 2rem;
     background-color: var(--primary);
@@ -114,6 +114,18 @@
     width: 80px;
     height: 40px;
     font-size: 1.5rem;
+    color: white;
+    border-radius: 7%;
+    border: 1px solid rgb(106, 15, 15);
+}
+
+.btn-start { 
+    margin: 200px auto;
+    text-align: center;
+    width: 80px;
+    height: 40px;
+    font-size: 2rem;
+    background-color: var(--primary);
     color: white;
     border-radius: 7%;
     border: 1px solid rgb(106, 15, 15);

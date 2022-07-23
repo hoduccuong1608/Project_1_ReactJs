@@ -11,6 +11,7 @@ function Form() {
     const [id, setId] = useState();
     const handleSubmit = async(e) => {
         e.preventDefault();
+        console.log('accoutnumber', accoutnumber);
         const OPTIONS = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
@@ -21,7 +22,7 @@ function Form() {
     };
 
     try {
-        const response = await fetch('http://localhost:5000/api/insert' , OPTIONS);
+        const response = await fetch('http://localhost:5001/api/customers/add' , OPTIONS);
         const data = await response.json();
         setId(data[0].id);
         console.log(data[0].id);
